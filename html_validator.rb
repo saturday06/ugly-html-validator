@@ -4,7 +4,7 @@ AfterStep do |scenario|
   unless $html_validator
     FileUtils.rm_rf W3cHtmlValidator::BASE_TMP_DIR
     FileUtils.mkdir_p W3cHtmlValidator::BASE_TMP_DIR
-    FileUtils.touch "dummy"
+    FileUtils.touch File.join(W3cHtmlValidator::BASE_TMP_DIR, "dummy.txt")
     $html_validator = W3cHtmlValidator.new
   end
   $html_validator.validate page.html, current_url
