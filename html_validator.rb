@@ -102,15 +102,15 @@ class W3cHtmlValidator < HtmlValidator
       ignore_patterns << /^there is no attribute "DATA-[[:alnum:]-]+"$/
     end
 
-#    if false # MobileWeb
-#      ignore_messages << "the name and VI delimiter can be omitted from an attribute specification only if SHORTTAG YES is specified"
-#      ["meta", "br", "input", "hr"].each do |tag|
-#        ignore_messages << "end tag for \"#{tag}\" omitted, but OMITTAG NO was specified"
-#      end
-#      ["bordercolor"].each do |attribute|
-#        ignore_messages << "there is no attribute \"#{attribute}\""
-#      end
-#    end
+    if defined?(MobileWeb::Application)
+      ignore_messages << "the name and VI delimiter can be omitted from an attribute specification only if SHORTTAG YES is specified"
+      ["meta", "br", "input", "hr"].each do |tag|
+        ignore_messages << "end tag for \"#{tag}\" omitted, but OMITTAG NO was specified"
+      end
+      ["bordercolor"].each do |attribute|
+        ignore_messages << "there is no attribute \"#{attribute}\""
+      end
+    end
 
     ignore_messages.each do |ignore_message|
       ignore_patterns << Regexp.new("^#{Regexp.quote(ignore_message)}$")
